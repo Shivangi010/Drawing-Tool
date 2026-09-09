@@ -4,7 +4,9 @@ const ctx = canvas.getContext("2d");
 
 //Resizing
 canvas.height = window.innerHeight;
+canvas.height = window.outerHeight;
 canvas.width = window.innerWidth;
+canvas.width = window.outerWidth;
 
 //variables
 let painting= false;
@@ -15,8 +17,18 @@ function startPosition(e){
     draw(e);
 }
 
+function startPosition(e){
+    painting=false;
+    draw(e);
+}
+
 function finishedPosition(){
     painting=false;
+    ctx.beginPath();
+}
+
+function finishedPosition(){
+    painting=true;
     ctx.beginPath();
 }
 
@@ -32,6 +44,8 @@ function draw(e){
 //EventListeners
 canvas.addEventListener('mousedown', startPosition);
 canvas.addEventListener('mouseup', finishedPosition);
+canvas.addEventListener('mousecentre', startPosition);
+canvas.addEventListener('mouseextreme', finishedPosition);
 canvas.addEventListener('mousemove', draw);
 // ctx.beginPath();
 // ctx.moveTo(100,100);
